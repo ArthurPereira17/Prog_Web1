@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo JavaScript</title>
+    <script src="js/funcoes.js"></script>
+    <style>
+        .classe1{
+            background-color: aquamarine;
+            text-align: center;
+        }
+        .classe2{
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <script>
+          var x = 5;
+        y = 3;
+        vBooleano = true;
+        vObjeto = {nome: "Arthur", idade: 19};
+        vData = new Date();
+        vetor1 = [1, 2, 3, 4, 5];
+        vetor2 = [4, "Arthur", 3.5, false];
+        const cNumero = 100;
+        z = x + y;
+        console.log('z = ' + z);
+        z = x - y;
+        console.log('z = ' + z);
+        z = x * y;
+        console.log('z = ' + z);
+        z = x / y;
+        console.log('z = ' + z);
+        z = x % y;
+        console.log('z = ' + z);
+        z = x ** y;
+        console.log('z = ' + z);
+        x++;
+        console.log('x = ' + x);
+        x--;
+        console.log('x = ' + x);
+        console.log(x+=y);
+        console.log(x-=y);
+
+        if (x > y) {
+            console.log('x é maior que y');
+        }else{
+            console.log('x é menor ou igual a y');
+        }
+        z = '5';
+        if (x == z) {
+            console.log('x é igual a z');
+        }
+        if (x === z) {
+            console.log('x é estritamente igual a z');
+        }else{
+            console.log('x e z são diferentes');
+        }
+        if (x != z) {
+            console.log('x é diferente de z');
+        }
+
+        if ((x > y) || (vData.getFullYear() > 2020)) {
+            console.log('Qualquer uma das condições é verdadeira');
+        }
+
+        if ((x > y) && (vData.getFullYear() > 2020)) {
+            console.log('Ambas as condições são verdadeiras');
+        }
+
+        if (!(x > y)) {
+            console.log('x não é maior que y');
+        }
+
+        switch (x) {
+            case 5:
+                console.log('x é igual a 5');
+                break;
+            case 10:
+                console.log('x é igual a 10');
+                break;
+            default:
+                console.log('x é diferente de 5 e 10');
+        }
+
+        for (i = 0; i < vetor1.length; i++) {
+            console.log(vetor1[i]);
+            
+        }
+
+        while (i < vetor2.length) {
+            console.log(vetor2[i]);
+            i++;
+        }
+
+        function minhaFuncao(){
+            console.log('Foi chamado o minhaFuncao');
+        }
+        minhaFuncao();
+
+        for(let j = 0; j < vetor1.length; j++){
+            console.log(vetor1[j]);
+        }
+        </script>
+        
+    <main>
+        <button onclick="alert('Fui clicado')">Clique Aqui</button>
+        <button onclick="minhaFuncao2('Fui clicado')">Clique Aqui 2</button>
+        <button id="botao">Clique Aqui 3</button>
+
+    <div id="mensagem"></div>
+    <p>
+        <button id = "botao2">Insere texto mensagem</button>
+        <br><input type="text" id="textoMensagem"><button id="alteraMensagem">Alterar a mensagem</button>
+    </p>
+
+    <p>
+        <div id = "div1">Texto da div</div>
+        <button onclick=" altCSS1()">Altera estilo 1</button>
+        <button onclick="classe1()">Ativa classe 1</button>
+        <button onclick="classe2()">Ativa classe 2</button>
+        <button onclick="remClasse2()">Remove classe 2</button>
+        <button onclick="document.getElementById('div1').classList.toggle('classe1');">Toggle classe 1</button>
+    </p>
+
+    <p>
+        <h4>Web Storage</h4>
+        <button onclick="localStorage.setItem('login', 'Apereira')"> Insere localStorage</button>
+        <button onclick="sessionStorage.setItem('login1','Apereira2')">Insere SessionStorage</button>
+        <button onclick="alert(localStorage.getItem('login'));">Mostra localStorage</button>
+
+        <p>
+            <h4>Lista de afazeres</h4>
+            <input type="text" id="itemLista">
+            <button onclick="inserirInicio()">Inserir item (no inicio)</button>
+            <button onclick="inserirItem()">Inserir Item (no final)</button>
+            <button onclick="excluirItem()">Excluir Item</button>
+            <ul id="lista"></ul>
+        </p>
+    </main>
+        <script>
+            function excluirItem(){
+                var vLista = document.getElementById('lista');
+                vLista.removeChild(vLista.lastChild);
+            }
+            function inserirInicio(){
+                var vLista = document.getElementById('lista');
+                var vItemLista = document.getElementById('itemLista');
+                var vElemento = document.createElement('li');
+
+                vElemento.innerHTML = vItemLista.value;
+                vLista.insertBefore(vElemento, vLista.firstChild);
+            }
+
+            function inserirItem(){
+                var vLista = document.getElementById('lista');
+                var vItemLista = document.getElementById('itemLista');
+                var vElemento = document.createElement('li');
+                vElemento.innerHTML = vItemLista.value;
+                vLista.appendChild(vElemento);
+            }
+            function remClasse2(){
+                var vElemento = document.getElementById('div1')
+                vElemento.classList.remove('classe2')
+            }
+
+            function classe1(){
+                var vElemento = document.getElementById('div1')
+                vElemento.classList.add('classe1')
+            }
+
+            function classe2(){
+                var vElemento = document.getElementById('div1')
+                vElemento.classList.add('classe2')
+            }
+
+            function altCSS1() {
+                var vElemento = document.getElementById('div1');
+                vElemento.style.backgroundColor = 'black'
+                vElemento.style.fontSize = '1.25em'
+            }
+
+        vBotao = document.getElementById('botao').addEventListener('click', () => minhaFuncao2('Clicou botão 3'))
+
+        document.getElementById('botao2').addEventListener('click', () => escreveMensagem('escreve Mensagem'))
+
+        document.getElementById('alteraMensagem').addEventListener('click',alteraMensagem)
+    </script>
+    
+</body>
+</html>
