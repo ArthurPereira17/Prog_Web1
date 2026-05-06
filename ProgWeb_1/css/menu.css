@@ -1,0 +1,40 @@
+menu{
+    margin: 0;
+    padding: 0;
+}
+
+menu li{
+    list-style: none;
+}
+
+.menu_principal > li {
+    display: inline-block;
+    padding-right:10px ;
+}
+
+nav{
+    padding: 10px;
+}
+
+nav a{
+    text-decoration: none;
+}
+
+nav a:hover{
+    text-decoration: underline;
+    color: black;
+    cursor: default;
+}
+
+.sub-menu{
+    background-color: darkgrey;
+    padding: 5px;
+    visibility: hidden;
+    /*display: none;*/
+    position: fixed;
+}
+
+.menu_principal > li:hover .sub-menu{
+    /*display: block;*/
+    visibility: visible;
+}

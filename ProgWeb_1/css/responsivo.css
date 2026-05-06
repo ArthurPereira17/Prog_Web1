@@ -1,0 +1,28 @@
+@media screen and (max-width: 425px) {
+    #menu_icone{
+        display: block;
+    
+    }
+
+    #menu_normal{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 426px){
+    #menu_icone{
+        display: none;
+    }
+
+    #menu_normal{
+        display: block;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    td{
+        font-size: 0.75em;
+        font-family: 'Courier New', Courier, monospace;
+    }
+}
+

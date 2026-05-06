@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Avançado</title>
+    <script src="js/classes.js"></script>
+</head>
+<body>
+    <div id="conteudo"></div>
+</body>
+<script>
+    function dataHora(){
+        document.getElementById('conteudo').innerHTML = new Date();
+    }
+
+    //document.getElementById("conteudo").innerHTML = dataHora();
+    setInterval(() =>
+        document.getElementById("conteudo").innerHTML = new Date(), 1000
+    );
+
+    function lacoVetor(vValor, vIndex, vVetor) {
+        console.log('Valor: ' + vValor + ' - Índice: ' + vIndex);
+    }
+    console.log(vetor4);
+    vetor4.map(lacoVetor);
+    vetor4.map((vValor, vIndex) => console.log('Valor: ' + vValor + ' - Índice: ' + vIndex));
+    //Destruturação de Arrays e Objetos
+
+    var vetor1 = [100, 200, 300, 400];
+
+    var [v1, v2, v3, v4] = vetor1;
+    var [v5, , , v6] = vetor1;
+
+    function aritimetica(p1,p2) {
+        return [ p1 + p2, p1 - p2, p1 * p2, p1 / p2]
+    }
+
+    var [vSoma, vSubtracao, vMultiplicacao, vDivisao] = aritimetica(10, 5);
+
+    var vProfessor = new Professor("João", 53, "DASC");
+
+    var {nome, departamento, idade} = vProfessor;
+
+    //Spread
+
+    var vetor2 = [400, 500, 600, 700];
+    var vetor3 = [...vetor1, ...vetor2];
+
+    var vAluno = {
+        nome: "Maria",
+        idade: 20,
+        curso: "ADS"
+    }
+
+    var vObjeto = {...vAluno, ...vProfessor}
+
+    //Combinado Destruturação e Spread
+
+    var [v10, v11, ...vetor4] = vetor3;
+</script>
+</html>

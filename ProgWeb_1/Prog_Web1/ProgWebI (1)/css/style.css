@@ -1,0 +1,73 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+table, th, td{
+    border: 1px solid black;
+}
+
+table{
+    border-collapse: collapse ;
+}
+
+th,td{
+    padding: 10px;
+}
+
+#Ultimo_item{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: aqua;
+}
+
+.estilo{
+    font-size: 20px;
+    font-style: italic;
+    font-variant: small-caps;
+}
+
+
+.bitcount-grid-double-ink-local {
+  font-family: "Bitcount Grid Double Ink", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-size: 30px;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0,
+    "SZP1" 0,
+    "SZP2" 0,
+    "XPN1" 0,
+    "XPN2" 0,
+    "YPN1" 0,
+    "YPN2" 0;
+}
+
+input{
+    border: none;
+    border-bottom: 2px solid gray;
+    background-color: darkgray;
+}
+
+input[type="text"]{
+    background-color: aqua;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"]{
+    background-color: crimson
+}
+
+input:focus{
+    outline: none;
+    background-color: dodgerblue;
+}
+
+input:hover{
+    background-color: darkorchid;
+    font-style: italic;
+}
+
+input:active{
+    background-color: blueviolet;
+}
