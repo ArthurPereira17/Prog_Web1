@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+    <script src="js/classes.js"></script>
+</head>
+
+<body>
+    <script>
+        function lancarDado() {
+            return (Math.floor(Math.random() * 6) + 1);
+        }
+
+        function verPromessa(resolveu, rejeitou) {
+            var dado = lancarDado();
+            if (dado == 6) {
+                resolveu("Deu 6, parabéns!");
+            } else {
+                rejeitou("Deu " + dado + ", tente novamente!");
+            }
+        }
+
+        var promessa = new Promise(verPromessa);
+
+        function deuCerto(mensagem) {
+            console.log("Deu certo: " + mensagem);
+        }
+
+        function deuErrado(mensagem) {
+            console.log("Deu errado: " + mensagem);
+        }
+
+        promessa
+            .then(deuCerto)
+            .catch(deuErrado);
+
+
+
+        //usando arrow function
+        var promessa2 = new Promise(
+            (resolveu, rejeitou) => {
+                var dado = lancarDado();
+                if (dado == 6) {
+                    resolveu(dado);
+                } else {
+                    rejeitou(dado);
+                }
+            }
+        )
+
+        promessa2.then(valor => 
+        console.log("Deu certo: " + valor)).catch(erro =>
+        console.log("Deu errado: " + erro));
+
+        //Usando assincrono.
+
+        function simulaAssicrono(pValor, pEspera) {
+            return new Promise((pResolveu) => {
+                setTimeout(() => pResolveu(pValor), pEspera);
+            })   
+        }
+
+        async function chamaAssincronos() {
+            console.log('Inicio');
+
+            var vResult1 = await simulaAssicrono('Operação 1', 1000);
+            console.log('vResult1 = ' + vResult1);
+
+            var vResult2 = await simulaAssicrono('Operação 2', 2000);
+            console.log('vResult2 = ' + vResult2);
+
+            var vResult3 = await simulaAssicrono('Operação 3', 1500);
+            console.log('vResult3 = ' + vResult3);
+        }
+
+        async function chamaAssincronos2() {
+            console.log('Inicio');
+            return await simulaAssicrono('Operação 4', 1500);
+        }
+        chamaAssincronos();
+
+        console.log('chamaAssincronos2()');
+        chamaAssincronos2().then(pRetorno => console.log(pRetorno));
+
+        var vProfessor = new Professor('João', 53, 'DASC');
+    </script>
+    <script type="module">
+        import {vProfessor_modulo, olaMundo} from "./modulo1.js";
+        import { cALuno, olaMundo2 } from "./modulo2.js";
+
+        console.log(vProfessor_modulo);
+        olaMundo();
+        console.log(cALuno.curso);
+        olaMundo2();
+    </script>
+    <script type="module">
+        import {olaMundo} from "./modulo1.js";
+        olaMundo();
+    </script>
+    <script type="module">
+        import {cAluno} from "./modulo2.js";
+        olaMundo2();
+    </script>
+</body>
+
+</html>
