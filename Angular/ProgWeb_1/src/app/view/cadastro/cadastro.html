@@ -1,0 +1,30 @@
+<h4>Cadastro</h4>
+<div>
+    <p>
+        {{vPessoa.idPessoa+' - '+vPessoa.nome+' - '+vPessoa.cidade+' - '+vPessoa.salario}}
+    </p>
+    <input type="text" placeholder="Nome:"[(ngModel)]="vPessoa.nome"><br>
+    <input type="text" placeholder="Cidade:"[(ngModel)]="vPessoa.cidade"><br>
+    <input type="number" name="% aumento" id="" [(ngModel)]="percAumento">
+    <button (click)="calculaAumento(percAumento)">Aplicar Aumento</button><br>
+    <input type="number" placeholder="Salario:"[(ngModel)]="vPessoa.salario" disabled><br>
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Cidade</th>
+            <th>Salário</th>
+        </tr>
+        @for (pessoa of vetorPessoas; track $index) {
+            <tr>
+                <td>{{pessoa.idPessoa}}</td>
+                <td>{{$index + 1}} - {{pessoa.nome}}</td>
+                <td>{{pessoa.cidade}}</td>
+                <td>{{pessoa.salario}}</td>
+            </tr>
+        }
+    </table>
+</div>
