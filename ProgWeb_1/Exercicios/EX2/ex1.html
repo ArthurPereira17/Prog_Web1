@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício 1 — Números</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --card: #161616;
+    --border: #2a2a2a;
+    --accent: #e8ff3c;
+    --text: #f0f0f0;
+    --muted: #666;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; font-family: 'Space Mono', monospace; }
+  .inputs { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+  input[type="number"] {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.2s;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  input[type="number"]:focus { border-color: var(--accent); }
+  .btn {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-soma { background: var(--accent); color: #0d0d0d; margin-bottom: 1rem; }
+  .btn-comp { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-comp:hover { border-color: var(--text); }
+  .result {
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .result.show { display: block; }
+  .result-soma { background: #1e1e1e; border: 1px solid var(--border); color: var(--accent); }
+  .result-comp { color: #0d0d0d; font-weight: 700; }
+  .result-comp.red { background: red; }
+  .result-comp.green { background: green; }
+  .result-comp.yellow { background: yellow; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Exercício 1</h1>
+  <p class="subtitle">// operações com dois números</p>
+
+  <div class="inputs">
+    <input type="number" id="n1" placeholder="0">
+    <input type="number" id="n2" placeholder="0">
+  </div>
+
+  <button class="btn btn-soma" onclick="calcSoma()">Calcular Soma</button>
+  <div id="res-soma" class="result result-soma"></div>
+
+  <hr class="divider">
+
+  <button class="btn btn-comp" onclick="comparar()">Comparar</button>
+  <div id="res-comp" class="result result-comp"></div>
+</div>
+
+<script>
+  function getVals() {
+    const a = parseFloat(document.getElementById('n1').value) || 0;
+    const b = parseFloat(document.getElementById('n2').value) || 0;
+    return [a, b];
+  }
+  function calcSoma() {
+    const [a, b] = getVals();
+    const el = document.getElementById('res-soma');
+    el.textContent = `${a} + ${b} = ${a + b}`;
+    el.classList.add('show');
+  }
+  function comparar() {
+    const [a, b] = getVals();
+    const el = document.getElementById('res-comp');
+    el.className = 'result result-comp show';
+    if (a > b) { el.textContent = 'Primeiro número é maior'; el.classList.add('red'); }
+    else if (b > a) { el.textContent = 'Segundo número é maior'; el.classList.add('green'); }
+    else { el.textContent = 'Ambos são iguais'; el.classList.add('yellow'); }
+  }
+</script>
+</body>
+</html>

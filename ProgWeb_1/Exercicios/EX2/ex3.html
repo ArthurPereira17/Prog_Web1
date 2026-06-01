@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício 3 — DOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #161b27;
+    --border: #252d3d;
+    --accent: #4fffb0;
+    --accent2: #ff6b6b;
+    --text: #e8eaf0;
+    --muted: #5a6380;
+    --done: #2a3a2a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  h1 { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; color: var(--accent); margin-bottom: 0.2rem; text-align: center; }
+  .sub { color: var(--muted); font-size: 0.8rem; font-family: 'Space Mono', monospace; text-align: center; margin-bottom: 1.5rem; }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.8rem;
+    width: 100%;
+    max-width: 560px;
+  }
+  .section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 1.2rem;
+  }
+  /* Tabela */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+  }
+  th { background: #1e2535; color: var(--accent); font-size: 0.75rem; letter-spacing: 0.05em; }
+  td { color: var(--text); }
+  tr:nth-child(even) td { background: #1a2030; }
+  .new-row td { background: #1e2d1e !important; color: var(--accent); animation: rowIn 0.3s ease; }
+  @keyframes rowIn { from { opacity:0; transform: translateX(-8px); } to { opacity:1; transform: translateX(0); } }
+  .btn {
+    padding: 0.65rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-green { background: var(--accent); color: #0d1a14; }
+  /* Contador */
+  .counter-display {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .counter-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 5ch;
+  }
+  .counter-label { color: var(--muted); font-size: 0.82rem; }
+  /* Lista */
+  ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  li {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  li::before { content: '→'; color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.8rem; transition: color 0.2s; }
+  li:hover { border-color: var(--accent); background: #1c2535; }
+  li.done { background: var(--done); border-color: #3a5a3a; color: #6abf6a; }
+  li.done::before { content: '✓'; color: #6abf6a; }
+</style>
+</head>
+<body>
+<div>
+  <h1>Exercício 3</h1>
+  <p class="sub">// tabela dinâmica · contador · lista</p>
+</div>
+
+<!-- Tabela -->
+<div class="section">
+  <p class="section-title">3a + 3b — Tabela Dinâmica</p>
+  <table id="tabela">
+    <thead><tr><th>Col A</th><th>Col B</th><th>Col C</th></tr></thead>
+    <tbody>
+      <tr><td>Linha 1, A</td><td>Linha 1, B</td><td>Linha 1, C</td></tr>
+      <tr><td>Linha 2, A</td><td>Linha 2, B</td><td>Linha 2, C</td></tr>
+      <tr><td>Linha 3, A</td><td>Linha 3, B</td><td>Linha 3, C</td></tr>
+    </tbody>
+  </table>
+  <button class="btn btn-green" onclick="addLinha()">+ Nova Linha</button>
+</div>
+
+<!-- Contador -->
+<div class="section">
+  <p class="section-title">3c — Contador setInterval()</p>
+  <div class="counter-display">
+    <div id="contador" class="counter-num">0</div>
+    <div class="counter-label">segundos<br>desde o carregamento</div>
+  </div>
+</div>
+
+<!-- Lista -->
+<div class="section">
+  <p class="section-title">3d — Atividades Favoritas (clique para concluir)</p>
+  <ul id="lista">
+    <li onclick="concluir(this)">Programar projetos pessoais</li>
+    <li onclick="concluir(this)">Assistir futebol ao vivo</li>
+    <li onclick="concluir(this)">Estudar estruturas de dados</li>
+    <li onclick="concluir(this)">Jogar videogame com amigos</li>
+    <li onclick="concluir(this)">Ouvir música e relaxar</li>
+  </ul>
+</div>
+
+<script>
+  // 3b — nova linha
+  let linhaCount = 3;
+  function addLinha() {
+    linhaCount++;
+    const tbody = document.querySelector('#tabela tbody');
+    const tr = document.createElement('tr');
+    tr.classList.add('new-row');
+    for (let i = 0; i < 3; i++) {
+      const td = document.createElement('td');
+      const cols = ['A', 'B', 'C'];
+      td.textContent = `Linha ${linhaCount}, ${cols[i]}`;
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+
+  // 3c — contador
+  let count = 0;
+  setInterval(() => {
+    count++;
+    document.getElementById('contador').textContent = count;
+  }, 1000);
+
+  // 3d — lista
+  function concluir(el) {
+    if (!el.classList.contains('done')) {
+      el.textContent = 'Concluído';
+      el.classList.add('done');
+      el.onclick = null;
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício 2 — Texto</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --card: #fff;
+    --border: #d8d0c0;
+    --accent: #1a1a2e;
+    --ink: #1a1a2e;
+    --muted: #999;
+    --tag: #e8e0d0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 4px 4px 0 var(--border);
+  }
+  h1 { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.03em; margin-bottom: 0.3rem; }
+  .subtitle { color: var(--muted); font-size: 0.82rem; font-family: 'Space Mono', monospace; margin-bottom: 2rem; }
+  .input-row { display: flex; gap: 0.6rem; margin-bottom: 1.2rem; }
+  input[type="text"] {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus { border-color: var(--accent); }
+  .btn {
+    padding: 0.75rem 1.2rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; font-family: 'Space Mono', monospace; }
+  .mirror-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    min-height: 52px;
+    color: var(--ink);
+    word-break: break-all;
+    margin-bottom: 1.5rem;
+    transition: all 0.15s;
+  }
+  .mirror-box.empty { color: var(--muted); }
+  .len-box {
+    background: var(--tag);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    display: none;
+    animation: pop 0.25s ease;
+  }
+  .len-box.show { display: block; }
+  .len-box span { font-weight: 700; font-size: 1.3rem; }
+  @keyframes pop { from { transform: scale(0.95); opacity:0; } to { transform: scale(1); opacity:1; } }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Exercício 2</h1>
+  <p class="subtitle">// espelhamento e tamanho de string</p>
+
+  <div class="input-row">
+    <input type="text" id="campo" placeholder="Digite algo..." oninput="espelhar()">
+    <button class="btn" onclick="mostrarTamanho()">Tamanho</button>
+  </div>
+
+  <p class="label">Conteúdo do campo</p>
+  <div id="mirror" class="mirror-box empty">— vazio —</div>
+
+  <div id="len-box" class="len-box"></div>
+</div>
+
+<script>
+  function espelhar() {
+    const val = document.getElementById('campo').value;
+    const el = document.getElementById('mirror');
+    if (val === '') { el.textContent = '— vazio —'; el.classList.add('empty'); }
+    else { el.textContent = val; el.classList.remove('empty'); }
+  }
+  function mostrarTamanho() {
+    const val = document.getElementById('campo').value;
+    const el = document.getElementById('len-box');
+    el.innerHTML = `O tamanho atual do campo é de: <span>${val.length}</span> caractere${val.length !== 1 ? 's' : ''}`;
+    el.classList.add('show');
+  }
+</script>
+</body>
+</html>
