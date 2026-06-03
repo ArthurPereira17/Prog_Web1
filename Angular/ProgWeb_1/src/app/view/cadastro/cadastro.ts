@@ -28,7 +28,7 @@ export class Cadastro {
       idPessoa: 1,
       nome: "Arthur",
       cidade: "Blumenau",
-      salario: 2500.00
+      salario: 8500.00
     },
     {
       idPessoa: 2,
@@ -46,7 +46,7 @@ export class Cadastro {
       idPessoa: 4,
       nome: "Ana",
       cidade: "Blumenau",
-      salario: 2600.00
+      salario: 9600.00
     },
     {
       idPessoa: 5,
@@ -55,4 +55,7 @@ export class Cadastro {
       salario: 3200.00
     }
   ]
+  editaPessoa(pessoa: Pessoa): void {
+    this.vPessoa = pessoa;
+  }
 }

@@ -23,7 +23,14 @@
                 <td>{{pessoa.idPessoa}}</td>
                 <td>{{$index + 1}} - {{pessoa.nome}}</td>
                 <td>{{pessoa.cidade}}</td>
-                <td>{{pessoa.salario}}</td>
+                <!--Quando salario for acima de 7000 moastra verde, 
+                caso contrario mostra vermelho-->
+                @if (pessoa.salario > 7000) {
+                    <td style="background-color: green; color: white;">{{pessoa.salario}}</td>
+                } @else {
+                    <td style="background-color: red; color: black;">{{pessoa.salario}}</td>
+                }
+                <td><button (click)="editaPessoa(pessoa)">Editar Pessoa</button></td>
             </tr>
         }
     </table>
