@@ -1,0 +1,26 @@
+<P></P>
+<button>Carrega álbuns</button>
+<p>
+    <input type="number" [(ngModel)]="album.id" placeholder="ID do álbum" disabled="">
+    <input type="text" [(ngModel)]="album.title" placeholder="Título do álbum" disabled="">
+    <input type="number" [(ngModel)]="album.userId" placeholder="ID do usuário" disabled="">
+</p>
+<p>
+    {{albumAlterado.id}} -{{albumAlterado.title}} - {{albumAlterado.userId}}
+</p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>User ID</th>
+    </tr>
+    @for (vAlbum of vetAlbum; track $index) {
+        <tr>
+            <td>{{vAlbum.id}}</td>
+            <td>{{vAlbum.title}}</td>
+            <td>{{vAlbum.userId}}</td>
+            <td><button (click)="album">Editar Album</button></td>
+        </tr>
+    }
+</table>
+<P>$nbsp;</P>
